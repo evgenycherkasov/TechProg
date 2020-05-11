@@ -18,7 +18,8 @@ struct KeyPairs {
 
 enum CipherType {
     RepEnc = 0,
-    ShtEnc = 1
+    ShtEnc = 1,
+    RepEncToInt = 2
 };
 
 struct CipherTexts {

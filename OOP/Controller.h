@@ -50,6 +50,17 @@ public:
 	void WriteCipherToFile(ofstream& out) override;
 };
 
+class ReplacementToIntEncryptionClass : public CipherTextClass
+{
+private:
+	vector <KeyPair> _pairs;
+public:
+	vector<KeyPair> GetPairs();
+	void SetPairs(vector<KeyPair> value);
+	void ReadCipherFromFile(ifstream& in) override;
+	void WriteCipherToFile(ofstream& out) override;
+};
+
 class HashArray
 {
 private:

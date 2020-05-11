@@ -40,7 +40,7 @@ bool readFile(ifstream& in, vector<CipherTexts> hasharray[])
             tempCipher->shift = atoi(line.c_str());
         }
 
-        if (tempCipher->type == RepEnc) {
+        if (tempCipher->type == RepEnc || tempCipher->type == RepEncToInt) {
             getline(in, line);
             KeyPair temp;
             KeyPairs keyPairsTemp;
@@ -93,6 +93,17 @@ bool writeToFile(ofstream& out, vector<CipherTexts> hasharray[])
                 out << "Type of cipher: Shift Cipher\n";
                 out << "Open text is: " << current.text << endl;
                 out << "Shift is: " << current.shift << endl;
+                out << "Cipher text is: " << current.cipherText << endl;
+            }
+            else if (current.type == RepEncToInt)
+            {
+                out << "Type of cipher: Replacement to int Cipher\n";
+                out << "Open text is: " << current.text << endl;
+                out << "Key pairs are: ";
+                for (auto const& item : current.keyPairs.pairs) {
+                    out << item.openChar << " " << item.cipherChar << " ";
+                }
+                out << endl;
                 out << "Cipher text is: " << current.cipherText << endl;
             }
         }
