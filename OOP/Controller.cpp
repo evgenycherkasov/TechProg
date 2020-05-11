@@ -42,14 +42,24 @@ void CipherTextClass::SetCipherText(string value)
 	cipherText = value;
 }
 
-int CipherTextClass::GetOpenTextLength()
+int CipherTextClass::GetOwnerLength()
 {
-	return openText.length();
+	return owner.length();
+}
+
+string CipherTextClass::GetOwner()
+{
+	return owner;
+}
+
+void CipherTextClass::SetOwner(string value)
+{
+	owner = value;
 }
 
 bool CipherTextClass::Compare(CipherTextClass* value)
 {
-	return this->GetOpenTextLength() > value->GetOpenTextLength();
+	return this->GetOwnerLength() > value->GetOwnerLength();
 }
 
 

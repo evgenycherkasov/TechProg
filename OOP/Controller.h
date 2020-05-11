@@ -11,15 +11,20 @@ class CipherTextClass
 private:
 	string openText;
 	string cipherText;
+	string owner;
 public:
 	virtual void ReadCipherFromFile(ifstream& in);
 	virtual void WriteCipherToFile(ofstream& out);
-	string GetOpenText();
+
 	void SetOpenText(string value);
-	int GetOpenTextLength();
+	string GetOpenText();
 	bool Compare(CipherTextClass* value);
 	string GetCipherText();
 	void SetCipherText(string value);
+
+	void SetOwner(string value);
+	string GetOwner();
+	int GetOwnerLength();
 };
 
 class ShiftEncryptionClass : public CipherTextClass

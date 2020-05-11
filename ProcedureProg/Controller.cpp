@@ -103,21 +103,20 @@ bool writeToFile(ofstream& out, vector<CipherTexts> hasharray[])
     return true;
 }
 
-int GetOpenTextLength(CipherTexts obj)
+int GetOwnerLength(CipherTexts obj)
 {
-    return obj.text.length();
+    return obj.owner.length();
 }
 
 bool compare(CipherTexts& a, CipherTexts& b)
 {
-    return GetOpenTextLength(a) > GetOpenTextLength(b);
+    return GetOwnerLength(a) > GetOwnerLength(b);
 }
 
 void sort(vector<CipherTexts> array[])
 {
     for (int hashIndex = 0; hashIndex < maxhash; hashIndex++)
     {
-        // Bubble sort
         int size = array[hashIndex].size();
         for (int i = 0; i < (size - 1); i++)
         {
