@@ -42,9 +42,21 @@ void CipherTextClass::SetCipherText(string value)
 	cipherText = value;
 }
 
+int CipherTextClass::GetOpenTextLength()
+{
+	return openText.length();
+}
+
+bool CipherTextClass::Compare(CipherTextClass* value)
+{
+	return this->GetOpenTextLength() > value->GetOpenTextLength();
+}
+
+
 #pragma endregion
 
 #pragma region ShiftEncryptionClass
+
 int ShiftEncryptionClass::GetShift()
 {
 	return _shift;
@@ -118,6 +130,27 @@ void ReplacementToCharEcnryptionClass::WriteCipherToFile(ofstream& out)
 
 
 #pragma region HashArray
+
+void HashArray::Sort()
+{
+	for (int hashIndex = 0; hashIndex < MAXHASH; hashIndex++)
+	{
+		int size = Conteiner[hashIndex].size();
+		for (int i = 0; i < (size - 1); i++)
+		{
+			for (int j = 0; j < (size - i - 1); j++)
+			{
+				if (Conteiner[hashIndex][j]->Compare(Conteiner[hashIndex][j + 1]))
+				{
+					CipherTextClass* temp = Conteiner[hashIndex][j];
+					Conteiner[hashIndex][j] = Conteiner[hashIndex][j + 1];
+					Conteiner[hashIndex][j + 1] = temp;
+				}
+			}
+		}
+
+	}
+}
 
 int HashArray::getHash(CipherTextClass* cipherText)
 {

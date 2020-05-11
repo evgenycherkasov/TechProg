@@ -16,7 +16,8 @@ public:
 	virtual void WriteCipherToFile(ofstream& out);
 	string GetOpenText();
 	void SetOpenText(string value);
-
+	int GetOpenTextLength();
+	bool Compare(CipherTextClass* value);
 	string GetCipherText();
 	void SetCipherText(string value);
 };
@@ -60,6 +61,7 @@ public:
 	const int MAXHASH = 128;
 	bool ReadFile(ifstream& in);
 	bool WriteFile(ofstream& out);
+	void Sort();
 
 	HashArray();
 	~HashArray();
