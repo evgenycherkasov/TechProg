@@ -129,7 +129,7 @@ int HashArray::getHash(CipherTextClass* cipherText)
 	sum += _cipherText.length();
 	sum += _openText.length() * 10;
 
-	return sum % MAXHASH;
+	return sum % maxhash;
 }
 
 bool HashArray::ReadFile(ifstream& in)
@@ -177,7 +177,7 @@ bool HashArray::WriteFile(ofstream& out)
 {
 	int count = 0;
 
-	for (int i = 0; i < MAXHASH; i++)
+	for (int i = 0; i < maxhash; i++)
 	{
 		for (int j = 0; j < (int)Conteiner[i].size(); j++)
 		{
@@ -197,7 +197,7 @@ bool HashArray::WriteCipherToFileWithMiss(ofstream& out, const type_info& missin
 {
 	int count = 0;
 
-	for (int i = 0; i < ; i++)
+	for (int i = 0; i < maxhash; i++)
 	{
 		for (int j = 0; j < (int)Conteiner[i].size(); j++)
 		{
@@ -219,13 +219,13 @@ bool HashArray::WriteCipherToFileWithMiss(ofstream& out, const type_info& missin
 
 HashArray::HashArray()
 {
-	Conteiner = new vector<CipherTextClass*>[MAXHASH];
+	Conteiner = new vector<CipherTextClass*>[maxhash];
 
 }
 
 HashArray::~HashArray()
 {
-	for (int i = 0; i < MAXHASH; i++)
+	for (int i = 0; i < maxhash; i++)
 	{
 		for (int j = 0; j < (int)Conteiner[i].size(); j++)
 		{

@@ -39,3 +39,4 @@ int getHash(CipherTexts cipher);
 
 bool readFile(ifstream& in, vector<CipherTexts> hasharray[]);
 bool writeToFile(ofstream& out, vector<CipherTexts> hasharray[]);
+bool WriteCipherToFileWithMiss(ofstream& out, vector<CipherTexts> hasharray[], int missingType);
