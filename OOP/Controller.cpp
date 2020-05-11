@@ -13,12 +13,17 @@ void CipherTextClass::ReadCipherFromFile(ifstream& in)
 	getline(in, line);
 
 	cipherText = line;
+
+	getline(in, line);
+
+	owner = line;
 }
 
 void CipherTextClass::WriteCipherToFile(ofstream& out)
 {
 	out << "Open text is  " << openText << endl;
 	out << "Cipher text is  " << cipherText << endl;
+	out << "Owner is " << owner << endl;
 	out << endl;
 }
 
@@ -40,6 +45,16 @@ string CipherTextClass::GetCipherText()
 void CipherTextClass::SetCipherText(string value)
 {
 	cipherText = value;
+}
+
+string CipherTextClass::GetOwner()
+{
+	return owner;
+}
+
+void CipherTextClass::SetOwner(string value)
+{
+	owner = value;
 }
 
 #pragma endregion
