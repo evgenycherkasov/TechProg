@@ -11,15 +11,21 @@ class CipherTextClass
 private:
 	string openText;
 	string cipherText;
+	string owner;
 public:
 	virtual void ReadCipherFromFile(ifstream& in);
 	virtual void WriteCipherToFile(ofstream& out);
+
 	string GetOpenText();
-	int GetOpenTextLength();
 	void SetOpenText(string value);
 
 	string GetCipherText();
 	void SetCipherText(string value);
+
+	string GetOwner();
+	void SetOwner(string value);
+
+	int GetOwnerLength();
 };
 
 class ShiftEncryptionClass : public CipherTextClass
@@ -58,7 +64,7 @@ private:
 public:
 	vector<CipherTextClass*>* Conteiner;
 
-	const int MAXHASH = 128;
+	const int maxhash = 128;
 	bool ReadFile(ifstream& in);
 	bool WriteFile(ofstream& out);
 
