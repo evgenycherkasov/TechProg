@@ -58,7 +58,7 @@ private:
 public:
 	vector<CipherTextClass*>* Conteiner;
 
-	const int MAXHASH = 128;
+	const int maxhash = 128;
 	bool ReadFile(ifstream& in);
 	bool WriteFile(ofstream& out);
 	void Sort();

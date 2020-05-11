@@ -133,7 +133,7 @@ void ReplacementToCharEcnryptionClass::WriteCipherToFile(ofstream& out)
 
 void HashArray::Sort()
 {
-	for (int hashIndex = 0; hashIndex < MAXHASH; hashIndex++)
+	for (int hashIndex = 0; hashIndex < maxhash; hashIndex++)
 	{
 		int size = Conteiner[hashIndex].size();
 		for (int i = 0; i < (size - 1); i++)
@@ -162,7 +162,7 @@ int HashArray::getHash(CipherTextClass* cipherText)
 	sum += _cipherText.length();
 	sum += _openText.length() * 10;
 
-	return sum % MAXHASH;
+	return sum % maxhash;
 }
 
 bool HashArray::ReadFile(ifstream& in)
@@ -210,7 +210,7 @@ bool HashArray::WriteFile(ofstream& out)
 {
 	int count = 0;
 
-	for (int i = 0; i < MAXHASH; i++)
+	for (int i = 0; i < maxhash; i++)
 	{
 		for (int j = 0; j < (int)Conteiner[i].size(); j++)
 		{
@@ -228,13 +228,13 @@ bool HashArray::WriteFile(ofstream& out)
 
 HashArray::HashArray()
 {
-	Conteiner = new vector<CipherTextClass*>[MAXHASH];
+	Conteiner = new vector<CipherTextClass*>[maxhash];
 
 }
 
 HashArray::~HashArray()
 {
-	for (int i = 0; i < MAXHASH; i++)
+	for (int i = 0; i < maxhash; i++)
 	{
 		for (int j = 0; j < (int)Conteiner[i].size(); j++)
 		{
