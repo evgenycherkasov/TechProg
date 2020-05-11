@@ -50,6 +50,7 @@ void CipherTextClass::SetCipherText(string value)
 #pragma endregion
 
 #pragma region ShiftEncryptionClass
+
 int ShiftEncryptionClass::GetShift()
 {
 	return _shift;
