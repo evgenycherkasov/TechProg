@@ -32,6 +32,11 @@ void CipherTextClass::SetOpenText(string value)
 	openText = value;
 }
 
+int CipherTextClass::GetOpenTextLength()
+{
+	return openText.length();
+}
+
 string CipherTextClass::GetCipherText()
 {
 	return cipherText;

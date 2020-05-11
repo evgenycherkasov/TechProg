@@ -15,6 +15,7 @@ public:
 	virtual void ReadCipherFromFile(ifstream& in);
 	virtual void WriteCipherToFile(ofstream& out);
 	string GetOpenText();
+	int GetOpenTextLength();
 	void SetOpenText(string value);
 
 	string GetCipherText();
