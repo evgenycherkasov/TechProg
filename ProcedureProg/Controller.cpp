@@ -116,3 +116,8 @@ bool writeToFile(ofstream& out, vector<CipherTexts> hasharray[])
     out << "There are " << count << " ciphers" << endl;
     return true;
 }
+
+int GetOwnerLength(CipherTexts obj)
+{
+    return obj.owner.length();
+}
