@@ -46,4 +46,4 @@ bool readFile(ifstream& in, vector<CipherTexts> hasharray[]);
 bool writeToFile(ofstream& out, vector<CipherTexts> hasharray[]);
 bool compare(CipherTexts& a, CipherTexts& b);
 void sort(vector<CipherTexts> array[]);
-
+int GetOwnerLength(CipherTexts obj);
