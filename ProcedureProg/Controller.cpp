@@ -117,6 +117,63 @@ bool writeToFile(ofstream& out, vector<CipherTexts> hasharray[])
     return true;
 }
 
+bool WriteCipherToFileWithMiss(ofstream& out, vector<CipherTexts> hasharray[], int missingType)
+{
+    if (!out.is_open())
+    {
+        return false;
+    }
+    int count = 0;
+    bool isAdd = false;
+    for (int i = 0; i < maxhash; i++)
+    {
+        for (int j = 0; j < (int)hasharray[i].size(); j++)
+        {
+            CipherTexts current = hasharray[i][j];
+            if (current.type == RepEnc && missingType != RepEnc)
+            {
+                isAdd = true;
+                out << "Type of cipher: Replacement Cipher\n";
+                out << "Open text is: " << current.text << endl;
+                out << "Key pairs are: ";
+                for (auto const& item : current.keyPairs.pairs) {
+                    out << item.openChar << " " << item.cipherChar << " ";
+                }
+                out << endl;
+                out << "Cipher text is: " << current.cipherText << endl;
+            }
+            else if (current.type == ShtEnc && missingType != ShtEnc)
+            {
+                isAdd = true;
+                out << "Type of cipher: Shift Cipher\n";
+                out << "Open text is: " << current.text << endl;
+                out << "Shift is: " << current.shift << endl;
+                out << "Cipher text is: " << current.cipherText << endl;
+            }
+            else if (current.type == RepEncToInt && missingType != RepEncToInt)
+            {
+                isAdd = true;
+                out << "Type of cipher: Replacement to int Cipher\n";
+                out << "Owner is: " << current.owner << endl;
+                out << "Open text is: " << current.text << endl;
+                out << "Key pairs are: ";
+                for (auto const& item : current.keyPairs.pairs) {
+                    out << item.openChar << " " << item.cipherChar << " ";
+                }
+                out << endl;
+                out << "Cipher text is: " << current.cipherText << endl;
+            }
+        }
+        if (!isAdd)
+        {
+            count += (int)hasharray[i].size();
+        }
+    }
+
+    out << "There are " << count << " ciphers" << endl;
+    return true;
+}
+
 int GetOwnerLength(CipherTexts obj)
 {
     return obj.owner.length();
