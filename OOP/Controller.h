@@ -23,6 +23,7 @@ public:
 
 	string GetOwner();
 	void SetOwner(string value);
+	int GetOwnerLength();
 };
 
 class ShiftEncryptionClass : public CipherTextClass

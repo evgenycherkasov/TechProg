@@ -57,9 +57,15 @@ void CipherTextClass::SetOwner(string value)
 	owner = value;
 }
 
+int CipherTextClass::GetOwnerLength()
+{
+	return owner.length();
+}
+
 #pragma endregion
 
 #pragma region ShiftEncryptionClass
+
 int ShiftEncryptionClass::GetShift()
 {
 	return _shift;
