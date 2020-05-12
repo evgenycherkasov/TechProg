@@ -121,3 +121,29 @@ int GetOwnerLength(CipherTexts obj)
 {
     return obj.owner.length();
 }
+
+bool compare(CipherTexts& a, CipherTexts& b)
+{
+    return GetOwnerLength(a) > GetOwnerLength(b);
+}
+
+void sort(vector<CipherTexts> array[])
+{
+    for (int hashIndex = 0; hashIndex < maxhash; hashIndex++)
+    {
+        int size = array[hashIndex].size();
+        for (int i = 0; i < (size - 1); i++)
+        {
+            for (int j = 0; j < (size - i - 1); j++)
+            {
+                if (compare(array[hashIndex][j], array[hashIndex][j + 1]))
+                {
+                    CipherTexts temp = array[hashIndex][j];
+                    array[hashIndex][j] = array[hashIndex][j + 1];
+                    array[hashIndex][j + 1] = temp;
+                }
+            }
+        }
+
+    }
+}
