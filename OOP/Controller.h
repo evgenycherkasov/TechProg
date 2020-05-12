@@ -16,15 +16,13 @@ public:
 	virtual void ReadCipherFromFile(ifstream& in);
 	virtual void WriteCipherToFile(ofstream& out);
 
-	string GetOpenText();
 	void SetOpenText(string value);
-
+	string GetOpenText();
 	string GetCipherText();
 	void SetCipherText(string value);
 
-	string GetOwner();
 	void SetOwner(string value);
-
+	string GetOwner();
 	int GetOwnerLength();
 };
 
