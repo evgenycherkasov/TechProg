@@ -41,3 +41,6 @@ int getHash(CipherTexts cipher);
 
 bool readFile(ifstream& in, vector<CipherTexts> hasharray[]);
 bool writeToFile(ofstream& out, vector<CipherTexts> hasharray[]);
+void sort(vector<CipherTexts> array[]);
+bool compare(CipherTexts& a, CipherTexts& b);
+int GetOwnerLength(CipherTexts obj);
