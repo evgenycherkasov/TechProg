@@ -15,14 +15,15 @@ private:
 public:
 	virtual void ReadCipherFromFile(ifstream& in);
 	virtual void WriteCipherToFile(ofstream& out);
-	string GetOpenText();
-	void SetOpenText(string value);
 
+	void SetOpenText(string value);
+	string GetOpenText();
+	bool Compare(CipherTextClass* value);
 	string GetCipherText();
 	void SetCipherText(string value);
 
-	string GetOwner();
 	void SetOwner(string value);
+	string GetOwner();
 	int GetOwnerLength();
 };
 
@@ -55,17 +56,6 @@ public:
 	void WriteCipherToFile(ofstream& out) override;
 };
 
-class ReplacementToIntEncryptionClass : public CipherTextClass
-{
-private:
-	vector <KeyPair> _pairs;
-public:
-	vector<KeyPair> GetPairs();
-	void SetPairs(vector<KeyPair> value);
-	void ReadCipherFromFile(ifstream& in) override;
-	void WriteCipherToFile(ofstream& out) override;
-};
-
 class HashArray
 {
 private:
@@ -73,9 +63,10 @@ private:
 public:
 	vector<CipherTextClass*>* Conteiner;
 
-	const int MAXHASH = 128;
+	const int maxhash = 128;
 	bool ReadFile(ifstream& in);
 	bool WriteFile(ofstream& out);
+	void Sort();
 
 	HashArray();
 	~HashArray();

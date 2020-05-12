@@ -13,17 +13,12 @@ void CipherTextClass::ReadCipherFromFile(ifstream& in)
 	getline(in, line);
 
 	cipherText = line;
-
-	getline(in, line);
-
-	owner = line;
 }
 
 void CipherTextClass::WriteCipherToFile(ofstream& out)
 {
 	out << "Open text is  " << openText << endl;
 	out << "Cipher text is  " << cipherText << endl;
-	out << "Owner is " << owner << endl;
 	out << endl;
 }
 
@@ -47,6 +42,11 @@ void CipherTextClass::SetCipherText(string value)
 	cipherText = value;
 }
 
+int CipherTextClass::GetOwnerLength()
+{
+	return owner.length();
+}
+
 string CipherTextClass::GetOwner()
 {
 	return owner;
@@ -57,10 +57,11 @@ void CipherTextClass::SetOwner(string value)
 	owner = value;
 }
 
-int CipherTextClass::GetOwnerLength()
+bool CipherTextClass::Compare(CipherTextClass* value)
 {
-	return owner.length();
+	return this->GetOwnerLength() > value->GetOwnerLength();
 }
+
 
 #pragma endregion
 
@@ -136,48 +137,30 @@ void ReplacementToCharEcnryptionClass::WriteCipherToFile(ofstream& out)
 
 #pragma endregion
 
-#pragma region ReplacementToIntEncryptionClass
 
-vector<KeyPair> ReplacementToIntEncryptionClass::GetPairs()
-{
-	return _pairs;
-}
-void ReplacementToIntEncryptionClass::SetPairs(vector<KeyPair> value)
-{
-	_pairs = value;
-}
-
-void ReplacementToIntEncryptionClass::ReadCipherFromFile(ifstream& in)
-{
-	CipherTextClass::ReadCipherFromFile(in);
-
-	string line;
-
-	getline(in, line);
-
-	KeyPair temp;
-
-	for (unsigned int i = 0; i < line.length() - 1; i += 2) {
-		temp.openChar = line[i];
-		temp.cipherChar = line[i + 1];
-		_pairs.push_back(temp);
-	}
-}
-
-void ReplacementToIntEncryptionClass::WriteCipherToFile(ofstream& out)
-{
-	out << "Type of cipher: Replacement to Int" << endl;
-	out << "Key pairs are: ";
-	for (auto const& item : _pairs) {
-		out << item.openChar << " " << item.cipherChar << " ";
-	}
-	out << endl;
-	ReplacementToIntEncryptionClass::WriteCipherToFile(out);
-}
-
-#pragma endregion
 
 #pragma region HashArray
+
+void HashArray::Sort()
+{
+	for (int hashIndex = 0; hashIndex < maxhash; hashIndex++)
+	{
+		int size = Conteiner[hashIndex].size();
+		for (int i = 0; i < (size - 1); i++)
+		{
+			for (int j = 0; j < (size - i - 1); j++)
+			{
+				if (Conteiner[hashIndex][j]->Compare(Conteiner[hashIndex][j + 1]))
+				{
+					CipherTextClass* temp = Conteiner[hashIndex][j];
+					Conteiner[hashIndex][j] = Conteiner[hashIndex][j + 1];
+					Conteiner[hashIndex][j + 1] = temp;
+				}
+			}
+		}
+
+	}
+}
 
 int HashArray::getHash(CipherTextClass* cipherText)
 {
@@ -189,7 +172,7 @@ int HashArray::getHash(CipherTextClass* cipherText)
 	sum += _cipherText.length();
 	sum += _openText.length() * 10;
 
-	return sum % MAXHASH;
+	return sum % maxhash;
 }
 
 bool HashArray::ReadFile(ifstream& in)
@@ -219,12 +202,6 @@ bool HashArray::ReadFile(ifstream& in)
 			tempRepToCharEncObj->ReadCipherFromFile(in);
 			tempCipher = tempRepToCharEncObj;
 		}
-		else if (type == 2)
-		{
-			ReplacementToIntEncryptionClass* tempRepToCharEncObj = new ReplacementToIntEncryptionClass();
-			tempRepToCharEncObj->ReadCipherFromFile(in);
-			tempCipher = tempRepToCharEncObj;
-		}
 		else
 		{
 			tempCipher = new CipherTextClass();
@@ -243,7 +220,7 @@ bool HashArray::WriteFile(ofstream& out)
 {
 	int count = 0;
 
-	for (int i = 0; i < MAXHASH; i++)
+	for (int i = 0; i < maxhash; i++)
 	{
 		for (int j = 0; j < (int)Conteiner[i].size(); j++)
 		{
@@ -261,13 +238,13 @@ bool HashArray::WriteFile(ofstream& out)
 
 HashArray::HashArray()
 {
-	Conteiner = new vector<CipherTextClass*>[MAXHASH];
+	Conteiner = new vector<CipherTextClass*>[maxhash];
 
 }
 
 HashArray::~HashArray()
 {
-	for (int i = 0; i < MAXHASH; i++)
+	for (int i = 0; i < maxhash; i++)
 	{
 		for (int j = 0; j < (int)Conteiner[i].size(); j++)
 		{

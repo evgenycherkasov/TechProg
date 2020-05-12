@@ -24,6 +24,8 @@ enum CipherType {
 
 struct CipherTexts {
     string text;
+    
+    string owner;
 
     string owner;
 
