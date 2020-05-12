@@ -19,18 +19,20 @@ struct KeyPairs {
 enum CipherType {
     RepEnc = 0,
     ShtEnc = 1,
-    RepToInt = 2
+    RepEncToInt = 2
 };
 
 struct CipherTexts {
     string text;
+
+    string owner;
 
     int type;
 
     //shiftEncryption
     int shift;
 
-    //ReplacementEcnryptionCharAndInt
+    //ReplacementEcnryption
     KeyPairs keyPairs;
 
     string cipherText;
