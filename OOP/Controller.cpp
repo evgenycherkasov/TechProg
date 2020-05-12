@@ -137,7 +137,46 @@ void ReplacementToCharEcnryptionClass::WriteCipherToFile(ofstream& out)
 
 #pragma endregion
 
+#pragma region ReplacementToIntEncryptionClass
 
+vector<KeyPair> ReplacementToIntEncryptionClass::GetPairs()
+{
+	return _pairs;
+}
+void ReplacementToIntEncryptionClass::SetPairs(vector<KeyPair> value)
+{
+	_pairs = value;
+}
+
+void ReplacementToIntEncryptionClass::ReadCipherFromFile(ifstream& in)
+{
+	CipherTextClass::ReadCipherFromFile(in);
+
+	string line;
+
+	getline(in, line);
+
+	KeyPair temp;
+
+	for (unsigned int i = 0; i < line.length() - 1; i += 2) {
+		temp.openChar = line[i];
+		temp.cipherChar = line[i + 1];
+		_pairs.push_back(temp);
+	}
+}
+
+void ReplacementToIntEncryptionClass::WriteCipherToFile(ofstream& out)
+{
+	out << "Type of cipher: Replacement to Int" << endl;
+	out << "Key pairs are: ";
+	for (auto const& item : _pairs) {
+		out << item.openChar << " " << item.cipherChar << " ";
+	}
+	out << endl;
+	ReplacementToIntEncryptionClass::WriteCipherToFile(out);
+}
+
+#pragma endregion
 
 #pragma region HashArray
 
