@@ -66,6 +66,7 @@ public:
 	const int maxhash = 128;
 	bool ReadFile(ifstream& in);
 	bool WriteFile(ofstream& out);
+	bool WriteCipherToFileWithMiss(ofstream& out, const type_info& missingType);
 	void Sort();
 
 	HashArray();
