@@ -236,6 +236,30 @@ bool HashArray::WriteFile(ofstream& out)
 }
 
 
+bool HashArray::WriteCipherToFileWithMiss(ofstream& out, const type_info& missingType)
+{
+	int count = 0;
+
+	for (int i = 0; i < maxhash; i++)
+	{
+		for (int j = 0; j < (int)Conteiner[i].size(); j++)
+		{
+			CipherTextClass* current = Conteiner[i][j];
+			if (missingType == typeid(*current))
+			{
+				count--;
+				continue;
+			}
+			current->WriteCipherToFile(out);
+		}
+		count += (int)Conteiner[i].size();
+	}
+
+	out << "There are " << count << " transports" << endl;
+
+	return false;
+}
+
 HashArray::HashArray()
 {
 	Conteiner = new vector<CipherTextClass*>[maxhash];
