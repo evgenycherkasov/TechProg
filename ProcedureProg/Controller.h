@@ -27,8 +27,6 @@ struct CipherTexts {
     
     string owner;
 
-    string owner;
-
     int type;
 
     //shiftEncryption
