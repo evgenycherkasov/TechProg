@@ -6,7 +6,7 @@
 int getHash(CipherTexts cipher)
 {
     int sum = 0;
-    sum += cipher.shift;
+    sum += cipher.cipherText.length();
     sum += cipher.text.length() * 10;
 
     return sum % 128;
@@ -33,6 +33,9 @@ bool readFile(ifstream& in, vector<CipherTexts> hasharray[])
 
         getline(in, line);
         tempCipher->type = atoi(line.c_str());
+
+        getline(in, line);
+        tempCipher->owner = line.c_str();
 
         getline(in, line);
         if (tempCipher->type == ShtEnc) {
@@ -117,6 +120,18 @@ bool writeToFile(ofstream& out, vector<CipherTexts> hasharray[])
     return true;
 }
 
+string vector_to_string(CipherTexts obj)
+{
+    vector<char> vec;
+
+    for (auto const& item : obj.keyPairs.pairs) {
+        vec.push_back(item.openChar);
+        vec.push_back(item.cipherChar);
+    }
+    string str(vec.begin(), vec.end());
+    return str;
+}
+
 bool WriteCipherToFileWithMiss(ofstream& out, vector<CipherTexts> hasharray[], int missingType)
 {
     if (!out.is_open())
@@ -146,6 +161,7 @@ bool WriteCipherToFileWithMiss(ofstream& out, vector<CipherTexts> hasharray[], i
             {
                 isAdd = true;
                 out << "Type of cipher: Shift Cipher\n";
+                out << "Owner is: " << current.owner << endl;
                 out << "Open text is: " << current.text << endl;
                 out << "Shift is: " << current.shift << endl;
                 out << "Cipher text is: " << current.cipherText << endl;
