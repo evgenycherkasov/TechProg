@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Files">
+      <UniqueIdentifier>{f9b1eb61-1d1a-4c3f-9094-2685cfe1aa10}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="OOPUnitTests.cpp">
@@ -26,5 +29,31 @@
     <ClInclude Include="pch.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Files\input_for_read_test.txt">
+      <Filter>Files</Filter>
+    </Text>
+    <Text Include="Files\input_for_sort_test.txt">
+      <Filter>Files</Filter>
+    </Text>
+    <Text Include="Files\input_for_write_test.txt">
+      <Filter>Files</Filter>
+    </Text>
+    <Text Include="Files\output_for_write_test.txt">
+      <Filter>Files</Filter>
+    </Text>
+    <Text Include="Files\inputShift_for_read_text.txt">
+      <Filter>Files</Filter>
+    </Text>
+    <Text Include="Files\inputRepChar_for_read_text.txt">
+      <Filter>Files</Filter>
+    </Text>
+    <Text Include="Files\inputRepInt_for_read_text.txt">
+      <Filter>Files</Filter>
+    </Text>
+    <Text Include="Files\input_for_writewithmiss_text.txt">
+      <Filter>Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

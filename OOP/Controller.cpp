@@ -17,8 +17,9 @@ void CipherTextClass::ReadCipherFromFile(ifstream& in)
 
 void CipherTextClass::WriteCipherToFile(ofstream& out)
 {
-	out << "Open text is  " << openText << endl;
-	out << "Cipher text is  " << cipherText << endl;
+	out << "Owner is: " << owner << endl;
+	out << "Open text is: " << openText << endl;
+	out << "Cipher text is: " << cipherText << endl;
 	out << endl;
 }
 
@@ -90,7 +91,7 @@ void ShiftEncryptionClass::ReadCipherFromFile(ifstream& in)
 void ShiftEncryptionClass::WriteCipherToFile(ofstream& out)
 {
 	out << "Type of cipher: Shift Cipher\n";
-	out << "Shift is " << _shift << endl;
+	out << "Shift is: " << _shift << endl;
 
 	CipherTextClass::WriteCipherToFile(out);
 }
@@ -129,7 +130,7 @@ void ReplacementToCharEcnryptionClass::WriteCipherToFile(ofstream& out)
 	out << "Type of cipher: Replacement to Char" << endl;
 	out << "Key pairs are: ";
 	for (auto const& item : _pairs) {
-		out << item.openChar << " " << item.cipherChar << " ";
+		out << item.openChar << item.cipherChar;
 	}
 	out << endl;
 	ReplacementToCharEcnryptionClass::WriteCipherToFile(out);
@@ -170,7 +171,7 @@ void ReplacementToIntEncryptionClass::WriteCipherToFile(ofstream& out)
 	out << "Type of cipher: Replacement to Int" << endl;
 	out << "Key pairs are: ";
 	for (auto const& item : _pairs) {
-		out << item.openChar << " " << item.cipherChar << " ";
+		out << item.openChar << item.cipherChar;
 	}
 	out << endl;
 	ReplacementToIntEncryptionClass::WriteCipherToFile(out);
@@ -240,6 +241,12 @@ bool HashArray::ReadFile(ifstream& in)
 			ReplacementToCharEcnryptionClass* tempRepToCharEncObj = new ReplacementToCharEcnryptionClass();
 			tempRepToCharEncObj->ReadCipherFromFile(in);
 			tempCipher = tempRepToCharEncObj;
+		}
+		else if (type == 2)
+		{
+			ReplacementToIntEncryptionClass* tempRepToIntEncObj = new ReplacementToIntEncryptionClass();
+			tempRepToIntEncObj->ReadCipherFromFile(in);
+			tempCipher = tempRepToIntEncObj;
 		}
 		else
 		{
