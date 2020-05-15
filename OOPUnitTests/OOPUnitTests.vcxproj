@@ -170,6 +170,11 @@
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\OOP\OOP.vcxproj">
+      <Project>{4d34c48b-ce27-4dac-94df-d740e6dfc93d}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <Text Include="Files\inputRepChar_for_read_text.txt" />
     <Text Include="Files\inputRepInt_for_read_text.txt" />
     <Text Include="Files\inputShift_for_read_text.txt" />
@@ -178,11 +183,10 @@
     <Text Include="Files\input_for_writewithmiss_text.txt" />
     <Text Include="Files\input_for_write_test.txt" />
     <Text Include="Files\output_for_write_test.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\OOP\OOP.vcxproj">
-      <Project>{4d34c48b-ce27-4dac-94df-d740e6dfc93d}</Project>
-    </ProjectReference>
+    <Text Include="Files\output_for_write_testChar.txt" />
+    <Text Include="Files\output_for_write_testHash.txt" />
+    <Text Include="Files\output_for_write_testInt.txt" />
+    <Text Include="Files\output_for_write_testShift.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

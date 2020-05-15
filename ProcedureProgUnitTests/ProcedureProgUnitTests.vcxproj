@@ -170,15 +170,15 @@
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ProcedureProg\ProcedureProg.vcxproj">
+      <Project>{5534ecdc-4524-4c9d-986d-9a5119f1e347}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <Text Include="Files\input_for_read_test.txt" />
     <Text Include="Files\input_for_sort_test.txt" />
     <Text Include="Files\input_for_write_test.txt" />
     <Text Include="Files\output_for_write_test.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ProcedureProg\ProcedureProg.vcxproj">
-      <Project>{5534ecdc-4524-4c9d-986d-9a5119f1e347}</Project>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

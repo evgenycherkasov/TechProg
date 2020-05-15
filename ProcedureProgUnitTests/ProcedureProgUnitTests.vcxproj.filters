@@ -31,10 +31,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Files\input_for_sort_test.txt">
+    <Text Include="Files\input_for_read_test.txt">
       <Filter>Files</Filter>
     </Text>
-    <Text Include="Files\input_for_read_test.txt">
+    <Text Include="Files\input_for_sort_test.txt">
       <Filter>Files</Filter>
     </Text>
     <Text Include="Files\input_for_write_test.txt">

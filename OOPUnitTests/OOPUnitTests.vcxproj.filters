@@ -31,6 +31,27 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <Text Include="Files\inputRepInt_for_read_text.txt">
+      <Filter>Files</Filter>
+    </Text>
+    <Text Include="Files\inputShift_for_read_text.txt">
+      <Filter>Files</Filter>
+    </Text>
+    <Text Include="Files\output_for_write_test.txt">
+      <Filter>Files</Filter>
+    </Text>
+    <Text Include="Files\output_for_write_testChar.txt">
+      <Filter>Files</Filter>
+    </Text>
+    <Text Include="Files\output_for_write_testHash.txt">
+      <Filter>Files</Filter>
+    </Text>
+    <Text Include="Files\output_for_write_testInt.txt">
+      <Filter>Files</Filter>
+    </Text>
+    <Text Include="Files\output_for_write_testShift.txt">
+      <Filter>Files</Filter>
+    </Text>
     <Text Include="Files\input_for_read_test.txt">
       <Filter>Files</Filter>
     </Text>
@@ -40,19 +61,10 @@
     <Text Include="Files\input_for_write_test.txt">
       <Filter>Files</Filter>
     </Text>
-    <Text Include="Files\output_for_write_test.txt">
-      <Filter>Files</Filter>
-    </Text>
-    <Text Include="Files\inputShift_for_read_text.txt">
+    <Text Include="Files\input_for_writewithmiss_text.txt">
       <Filter>Files</Filter>
     </Text>
     <Text Include="Files\inputRepChar_for_read_text.txt">
-      <Filter>Files</Filter>
-    </Text>
-    <Text Include="Files\inputRepInt_for_read_text.txt">
-      <Filter>Files</Filter>
-    </Text>
-    <Text Include="Files\input_for_writewithmiss_text.txt">
       <Filter>Files</Filter>
     </Text>
   </ItemGroup>
