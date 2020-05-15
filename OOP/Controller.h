@@ -6,6 +6,13 @@
 
 using namespace std;
 
+struct KeyPair
+{
+	char openChar;
+	char cipherChar;
+};
+
+
 class CipherTextClass
 {
 private:
@@ -25,6 +32,8 @@ public:
 	void SetOwner(string value);
 	string GetOwner();
 	int GetOwnerLength();
+
+	string vectostring(vector<KeyPair> temp);
 };
 
 class ShiftEncryptionClass : public CipherTextClass
@@ -37,12 +46,6 @@ public:
 
 	void ReadCipherFromFile(ifstream& in) override;
 	void WriteCipherToFile(ofstream& out) override;
-};
-
-struct KeyPair
-{
-	char openChar;
-	char cipherChar;
 };
 
 class ReplacementToCharEcnryptionClass : public CipherTextClass

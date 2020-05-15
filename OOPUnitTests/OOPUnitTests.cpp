@@ -23,7 +23,6 @@ namespace OOPUnitTests
 			Assert::IsTrue(temp.GetCipherText() == "Fdsse yt pormef");
 
 		}
-
 		TEST_METHOD(WriteFileTest)
 		{
 			string outputPath = "../OOPUnitTests/Files/output_for_write_test.txt";
@@ -67,14 +66,14 @@ namespace OOPUnitTests
 			temp2.SetOwner("Geee");
 
 
-			Assert::IsTrue(temp1.Compare(&temp2));
+			Assert::IsTrue(temp2.Compare(&temp1));
 		}
 	};
 
 	TEST_CLASS(ShiftEncryptionClassTest)
 	{
 	public:
-		TEST_METHOD(ReadTransportFromFileTest)
+		TEST_METHOD(ReadCipherFromFileTestShift)
 		{
 			string inputPath = "../OOPUnitTests/Files/inputShift_for_read_text.txt";
 			ifstream infile(inputPath);
@@ -91,7 +90,7 @@ namespace OOPUnitTests
 
 		TEST_METHOD(WriteFileTestShift)
 		{
-			string outputPath = "../OOPUnitTests/Files/output_for_write_test.txt";
+			string outputPath = "../OOPUnitTests/Files/output_for_write_testShift.txt";
 
 			ofstream output(outputPath);
 
@@ -110,7 +109,7 @@ namespace OOPUnitTests
 			buffer << infile.rdbuf();
 			string resultInBuffer = buffer.str();
 
-			string waitingResult = "Type of cipher: Shift Cipher\nShift is: 5\nOwner is: Ddddd\nOpen text is: gfdgfdgg\nCipher text is: gsdgfdsfs\nThere are 1 ciphers\n";
+			string waitingResult = "Type of cipher: Shift Cipher\nShift is: 5\nOwner is: Ddddd\nOpen text is: gfdgfdgg\nCipher text is: gsdgfdsfs\n";
 
 			Assert::AreEqual(waitingResult, resultInBuffer);
 		}
@@ -128,26 +127,29 @@ namespace OOPUnitTests
 			temp.ReadCipherFromFile(infile);
 			infile.close();
 
+			KeyPair kpTemp;
+
 			vector<KeyPair> checkingVector;
 
-			KeyPair tKp;
-			tKp.openChar = 'a';
-			tKp.cipherChar = 'b';
-			checkingVector.push_back(tKp);
+			kpTemp.openChar = 'a';
+			kpTemp.cipherChar = 'b';
 
-			tKp.openChar = 'c';
-			tKp.cipherChar = 'd';
-			checkingVector.push_back(tKp);
+			checkingVector.push_back(kpTemp);
+
+			kpTemp.openChar = 'c';
+			kpTemp.cipherChar = 'd';
+
+			checkingVector.push_back(kpTemp);
 
 			Assert::IsTrue(temp.GetOpenText() == "Hello my friend");
 			Assert::IsTrue(temp.GetOwner() == "Jenya");
 			Assert::IsTrue(temp.GetCipherText() == "aaa");
-			Assert::IsTrue(temp.GetPairs() == checkingVector);
+			Assert::IsTrue(temp.vectostring(checkingVector) == "abcd");
 		}
 
 		TEST_METHOD(WriteTransportToFileTestRepChar)
 		{
-			string outputPath = "../OOPUnitTests/Files/output_for_write_test.txt";
+			string outputPath = "../OOPUnitTests/Files/output_for_write_testChar.txt";
 
 			ofstream output(outputPath);
 
@@ -178,7 +180,7 @@ namespace OOPUnitTests
 			buffer << infile.rdbuf();
 			string resultInBuffer = buffer.str();
 
-			string waitingResult = "Type of cipher: Replacement to Char\nKey pairs are: abcd\nOwner is: Jenya\nOpen text is: Hello my friend\nCipher text is: aaa\nThere are 1 ciphers\n";
+			string waitingResult = "Type of cipher: Replacement to Char\nKey pairs are: abcd\nOwner is: Jenya\nOpen text is: Hello my friend\nCipher text is: aaa\n";
 
 			Assert::AreEqual(waitingResult, resultInBuffer);
 		}
@@ -210,16 +212,16 @@ namespace OOPUnitTests
 			Assert::IsTrue(temp.GetOpenText() == "Hello my friend");
 			Assert::IsTrue(temp.GetOwner() == "Jenya");
 			Assert::IsTrue(temp.GetCipherText() == "aaa");
-			Assert::IsTrue(temp.GetPairs() == checkingVector);
+			Assert::IsTrue(temp.vectostring(checkingVector) == "a1c2");
 		}
 
 		TEST_METHOD(WriteTransportToFileTestRepInt)
 		{
-			string outputPath = "../OOPUnitTests/Files/output_for_write_test.txt";
+			string outputPath = "../OOPUnitTests/Files/output_for_write_testInt.txt";
 
 			ofstream output(outputPath);
 
-			ReplacementToCharEcnryptionClass temp;
+			ReplacementToIntEncryptionClass temp;
 
 			temp.SetCipherText("aaa");
 			temp.SetOpenText("Hello my friend");
@@ -246,12 +248,11 @@ namespace OOPUnitTests
 			buffer << infile.rdbuf();
 			string resultInBuffer = buffer.str();
 
-			string waitingResult = "Type of cipher: Replacement to Char\nKey pairs are: a1c2\nOwner is: Jenya\nOpen text is: Hello my friend\nCipher text is: aaa\nThere are 1 ciphers\n";
+			string waitingResult = "Type of cipher: Replacement to Int\nKey pairs are: a1c2\nOwner is: Jenya\nOpen text is: Hello my friend\nCipher text is: aaa\n";
 
 			Assert::AreEqual(waitingResult, resultInBuffer);
 		}
 	};
-
 	TEST_CLASS(HashArrayUnitTests)
 	{
 	public:
@@ -259,7 +260,7 @@ namespace OOPUnitTests
 		TEST_METHOD(WriteFileWithMissingTypeTest)
 		{
 			string inputPath = "../OOPUnitTests/Files/input_for_writewithmiss_text.txt";
-			string outPath = "../OOPUnitTests/Files/output_for_write_test.txt";
+			string outPath = "../OOPUnitTests/Files/output_for_write_testHash.txt";
 
 			ifstream infile(inputPath);
 			ofstream output(outPath);

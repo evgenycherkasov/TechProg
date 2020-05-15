@@ -2,6 +2,18 @@
 
 #pragma region CipherTextClass
 
+string CipherTextClass::vectostring(vector<KeyPair> temp)
+{
+	vector<char> vec;
+
+	for (auto const& item : temp) {
+		vec.push_back(item.openChar);
+		vec.push_back(item.cipherChar);
+	}
+	string str(vec.begin(), vec.end());
+	return str;
+}
+
 void CipherTextClass::ReadCipherFromFile(ifstream& in)
 {
 	string line;
@@ -13,6 +25,10 @@ void CipherTextClass::ReadCipherFromFile(ifstream& in)
 	getline(in, line);
 
 	cipherText = line;
+
+	getline(in, line);
+
+	owner = line;
 }
 
 void CipherTextClass::WriteCipherToFile(ofstream& out)
@@ -20,7 +36,6 @@ void CipherTextClass::WriteCipherToFile(ofstream& out)
 	out << "Owner is: " << owner << endl;
 	out << "Open text is: " << openText << endl;
 	out << "Cipher text is: " << cipherText << endl;
-	out << endl;
 }
 
 string CipherTextClass::GetOpenText()
@@ -133,7 +148,7 @@ void ReplacementToCharEcnryptionClass::WriteCipherToFile(ofstream& out)
 		out << item.openChar << item.cipherChar;
 	}
 	out << endl;
-	ReplacementToCharEcnryptionClass::WriteCipherToFile(out);
+	CipherTextClass::WriteCipherToFile(out);
 }
 
 #pragma endregion
@@ -174,7 +189,7 @@ void ReplacementToIntEncryptionClass::WriteCipherToFile(ofstream& out)
 		out << item.openChar << item.cipherChar;
 	}
 	out << endl;
-	ReplacementToIntEncryptionClass::WriteCipherToFile(out);
+	CipherTextClass::WriteCipherToFile(out);
 }
 
 #pragma endregion
@@ -276,7 +291,7 @@ bool HashArray::WriteFile(ofstream& out)
 		count += (int)Conteiner[i].size();
 	}
 
-	out << "There are " << count << " transports" << endl;
+	out << "There are " << count << " ciphers" << endl;
 
 	return false;
 }
@@ -301,7 +316,7 @@ bool HashArray::WriteCipherToFileWithMiss(ofstream& out, const type_info& missin
 		count += (int)Conteiner[i].size();
 	}
 
-	out << "There are " << count << " transports" << endl;
+	out << "There are " << count << " ciphers" << endl;
 
 	return false;
 }

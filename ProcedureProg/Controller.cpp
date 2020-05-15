@@ -39,12 +39,10 @@ bool readFile(ifstream& in, vector<CipherTexts> hasharray[])
 
         getline(in, line);
         if (tempCipher->type == ShtEnc) {
-            getline(in, line);
             tempCipher->shift = atoi(line.c_str());
         }
 
         if (tempCipher->type == RepEnc || tempCipher->type == RepEncToInt) {
-            getline(in, line);
             KeyPair temp;
             KeyPairs keyPairsTemp;
             vector <KeyPair> keypairs;
@@ -140,6 +138,7 @@ bool WriteCipherToFileWithMiss(ofstream& out, vector<CipherTexts> hasharray[], i
     }
     int count = 0;
     bool isAdd = false;
+    int missed = 0;
     for (int i = 0; i < maxhash; i++)
     {
         for (int j = 0; j < (int)hasharray[i].size(); j++)
@@ -147,7 +146,6 @@ bool WriteCipherToFileWithMiss(ofstream& out, vector<CipherTexts> hasharray[], i
             CipherTexts current = hasharray[i][j];
             if (current.type == RepEnc && missingType != RepEnc)
             {
-                isAdd = true;
                 out << "Type of cipher: Replacement Cipher\n";
                 out << "Open text is: " << current.text << endl;
                 out << "Key pairs are: ";
@@ -159,7 +157,6 @@ bool WriteCipherToFileWithMiss(ofstream& out, vector<CipherTexts> hasharray[], i
             }
             else if (current.type == ShtEnc && missingType != ShtEnc)
             {
-                isAdd = true;
                 out << "Type of cipher: Shift Cipher\n";
                 out << "Owner is: " << current.owner << endl;
                 out << "Open text is: " << current.text << endl;
@@ -168,7 +165,6 @@ bool WriteCipherToFileWithMiss(ofstream& out, vector<CipherTexts> hasharray[], i
             }
             else if (current.type == RepEncToInt && missingType != RepEncToInt)
             {
-                isAdd = true;
                 out << "Type of cipher: Replacement to int Cipher\n";
                 out << "Owner is: " << current.owner << endl;
                 out << "Open text is: " << current.text << endl;
@@ -179,13 +175,14 @@ bool WriteCipherToFileWithMiss(ofstream& out, vector<CipherTexts> hasharray[], i
                 out << endl;
                 out << "Cipher text is: " << current.cipherText << endl;
             }
+            if (current.type == missingType)
+            {
+                missed += 1;
+            }
         }
-        if (!isAdd)
-        {
-            count += (int)hasharray[i].size();
-        }
+        count += (int)hasharray[i].size();
     }
-
+    count -= missed;
     out << "There are " << count << " ciphers" << endl;
     return true;
 }

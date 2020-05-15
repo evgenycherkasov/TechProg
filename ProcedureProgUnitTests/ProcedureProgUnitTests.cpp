@@ -77,7 +77,7 @@ namespace ProcedureProgUnitTests
 
 			#pragma endregion
 
-			CipherTexts second = hasharray[44][0];
+			CipherTexts second = hasharray[54][0];
 
 			#pragma region AssertsForSecondObject
 
@@ -95,7 +95,7 @@ namespace ProcedureProgUnitTests
 
 		TEST_METHOD(SortTest)
 		{
-			string inputPath = "../ProcedureProgUnitTests/Files/input_for_read_test.txt";
+			string inputPath = "../ProcedureProgUnitTests/Files/input_for_sort_test.txt";
 
 			ifstream infile(inputPath);
 

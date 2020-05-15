@@ -1,6 +1,4 @@
-1
 Hello my friend
-1
+aaa
 Jenya
 abcd
-aaa

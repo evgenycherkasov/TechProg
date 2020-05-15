@@ -1,0 +1,5 @@
+Type of cipher: Replacement to Char
+Key pairs are: abcd
+Owner is: Jenya
+Open text is: Hello my friend
+Cipher text is: aaa
