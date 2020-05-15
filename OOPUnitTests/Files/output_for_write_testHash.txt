@@ -1,0 +1,6 @@
+Type of cipher: Shift Cipher
+Shift is: 3
+Owner is: Jenya
+Open text is: Hello my friend
+Cipher text is: Fdsse yt pormef
+There are 1 ciphers

@@ -1,0 +1,5 @@
+Type of cipher: Replacement to Int
+Key pairs are: a1c2
+Owner is: Jenya
+Open text is: Hello my friend
+Cipher text is: aaa

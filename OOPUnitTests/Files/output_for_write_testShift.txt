@@ -1,0 +1,5 @@
+Type of cipher: Shift Cipher
+Shift is: 5
+Owner is: Ddddd
+Open text is: gfdgfdgg
+Cipher text is: gsdgfdsfs
