@@ -7,45 +7,48 @@
 using namespace std;
 
 
-int main(int argc, char* argv[])
+int main( int argc, char* argv[] )
 {
-    string inputPath = "input.txt";
-    string outputPath = "output.txt";
+	string inputPath = "input.txt";
+	string outputPath = "output.txt";
 
-    if (argc != 3) {
-        cout << "Type files" << endl;
-        return 1;
-    }
+	if ( argc != 3 )
+	{
+		cout << "Type files" << endl;
+		return 1;
+	}
 
-    inputPath = argv[1];
-    outputPath = argv[2];
+	inputPath = argv[1];
+	outputPath = argv[2];
 
-    vector<CipherTexts> hasharray[maxhash];
+	vector<CipherTexts> hasharray[maxhash];
 
-    ifstream infile(inputPath);
+	ifstream infile( inputPath );
 
-    bool result = readFile(infile, hasharray);
-    cout << result;
-    if (!result)
-    {
-        cout << "Bad input file!\n";
-        return 1;
-    }
-    else {
-        infile.close();
-    }
+	bool result = readFile( infile, hasharray );
+	cout << result;
+	if ( !result )
+	{
+		cout << "Bad input file!\n";
+		return 1;
+	}
+	else
+	{
+		infile.close();
+	}
 
-    ofstream out(outputPath);
+	ofstream out( outputPath );
 
-    result = writeToFile(out, hasharray);
-    if (!result)
-    {
-        cout << "Bad output file!\n";
-        return 1;
-    }
-    else {
-        out.close();
-    }
+	result = writeToFile( out, hasharray );
+	if ( !result )
+	{
+		cout << "Bad output file!\n";
+		return 1;
+	}
+	else
+	{
+		out.close();
+	}
 
-    return 0;
+	return 0;
 }
