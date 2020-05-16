@@ -18,12 +18,16 @@ bool readFile(ifstream& in, vector<CipherTexts> hasharray[])
 
     if (!in.is_open())
     {
-        return false;
+        throw std::invalid_argument("Bad input file. Can not read file!");
     }
 
     string line;
     getline(in, line);
     count = atoi(line.c_str());
+    if (count <= 0)
+    {
+        throw std::invalid_argument("Bad input count. Its can not be <= 0");
+    }
     for (int i = 0; i < count; i++)
     {
         CipherTexts* tempCipher = new CipherTexts();
@@ -31,18 +35,48 @@ bool readFile(ifstream& in, vector<CipherTexts> hasharray[])
         getline(in, line);
         tempCipher->text = line.c_str();
 
+        if (tempCipher->text.length() == 0)
+        {
+            throw std::invalid_argument("Bad input open text. Its can not be empty");
+        }
+
         getline(in, line);
+
         tempCipher->type = atoi(line.c_str());
 
-        getline(in, line);
-        tempCipher->owner = line.c_str();
+        if (tempCipher->type > 2 || tempCipher->type < 0)
+        {
+            throw std::invalid_argument("Bad input type. Its can not be more then 2 or less then 0");
+        }
 
         getline(in, line);
+
+        tempCipher->owner = line.c_str();
+
+        if (tempCipher->owner.length() == 0)
+        {
+            throw std::invalid_argument("Bad input owner. Its can not be empty");
+        }
+
+        getline(in, line);
+
         if (tempCipher->type == ShtEnc) {
+
             tempCipher->shift = atoi(line.c_str());
+
+            if (tempCipher->shift < 0)
+            {
+                throw std::invalid_argument("Bad input shift. Its can not be less then 0");
+            }
         }
 
         if (tempCipher->type == RepEnc || tempCipher->type == RepEncToInt) {
+
+            if (line.length() == 0)
+            {
+                throw std::invalid_argument("Bad input kepairs. Its can not be empty");
+            }
+
             KeyPair temp;
             KeyPairs keyPairsTemp;
             vector <KeyPair> keypairs;
@@ -56,7 +90,13 @@ bool readFile(ifstream& in, vector<CipherTexts> hasharray[])
         }
 
         getline(in, line);
+
         tempCipher->cipherText = line.c_str();
+
+        if (tempCipher->cipherText.length() == 0)
+        {
+            throw std::invalid_argument("Bad input cipher text. Its can not be empty");
+        }
 
         int index = getHash(*tempCipher);
         hasharray[index].push_back(*tempCipher);
@@ -69,8 +109,9 @@ bool writeToFile(ofstream& out, vector<CipherTexts> hasharray[])
 {
     if (!out.is_open())
     {
-        return false;
+        throw std::invalid_argument("Bad output file. Can not read file!");
     }
+
     int count = 0;
 
     for (int i = 0; i < maxhash; i++)
@@ -132,10 +173,11 @@ string vector_to_string(CipherTexts obj)
 
 bool WriteCipherToFileWithMiss(ofstream& out, vector<CipherTexts> hasharray[], int missingType)
 {
-    if (!out.is_open())
+    if (!out.is_open() || missingType < 0 || missingType > 2)
     {
-        return false;
+        throw std::invalid_argument("Bad output file. Can not read file! Or missing type invalid!");
     }
+
     int count = 0;
     bool isAdd = false;
     int missed = 0;
