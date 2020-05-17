@@ -19,7 +19,6 @@ struct KeyPairs {
 enum CipherType {
     RepEnc = 0,
     ShtEnc = 1,
-    RepToInt = 2
 };
 
 struct CipherTexts {
@@ -40,3 +39,5 @@ int getHash(CipherTexts cipher);
 
 bool readFile(ifstream& in, vector<CipherTexts> hasharray[]);
 bool writeToFile(ofstream& out, vector<CipherTexts> hasharray[]);
+
+void multiMethod( vector<CipherTexts> hasharray[], ofstream& outfile );

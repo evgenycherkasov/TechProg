@@ -19,6 +19,11 @@ public:
 
 	string GetCipherText();
 	void SetCipherText(string value);
+
+	virtual void GlobalMM( CipherTextClass* other, ofstream& out );
+
+	virtual void ShiftMM( ofstream& out );
+	virtual void RepToCharMM( ofstream& out );
 };
 
 class ShiftEncryptionClass : public CipherTextClass
@@ -31,6 +36,11 @@ public:
 
 	void ReadCipherFromFile(ifstream& in) override;
 	void WriteCipherToFile(ofstream& out) override;
+
+	void GlobalMM( CipherTextClass* other, ofstream& out ) override;
+
+	void ShiftMM( ofstream& out ) override;
+	void RepToCharMM( ofstream& out ) override;
 };
 
 struct KeyPair
@@ -48,6 +58,11 @@ public:
 	void SetPairs(vector<KeyPair> value);
 	void ReadCipherFromFile(ifstream& in) override;
 	void WriteCipherToFile(ofstream& out) override;
+
+	void GlobalMM( CipherTextClass* other, ofstream& out ) override;
+
+	void ShiftMM( ofstream& out ) override;
+	void RepToCharMM( ofstream& out ) override;
 };
 
 
@@ -61,6 +76,8 @@ public:
 	const int MAXHASH = 128;
 	bool ReadFile(ifstream& in);
 	bool WriteFile(ofstream& out);
+
+	void GlobalMM( ofstream& out );
 
 	HashArray();
 	~HashArray();

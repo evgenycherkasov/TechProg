@@ -31,6 +31,7 @@ int main(int argc, char* argv[])
 
 	hashArray->ReadFile(infile);
 	hashArray->WriteFile(outfile);
+	hashArray->GlobalMM( outfile );
 
 
 	return 0;

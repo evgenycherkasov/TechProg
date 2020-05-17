@@ -42,9 +42,25 @@ void CipherTextClass::SetCipherText(string value)
 	cipherText = value;
 }
 
+void CipherTextClass::GlobalMM( CipherTextClass* other, ofstream& out )
+{
+	out << "Unknown cipher method" << endl;
+}
+
+void CipherTextClass::ShiftMM( ofstream& out )
+{
+	out << "Unknown cipher method" << endl;
+}
+
+void CipherTextClass::RepToCharMM( ofstream& out )
+{
+	out << "Unknown cipher method" << endl;
+}
+
 #pragma endregion
 
 #pragma region ShiftEncryptionClass
+
 int ShiftEncryptionClass::GetShift()
 {
 	return _shift;
@@ -71,6 +87,21 @@ void ShiftEncryptionClass::WriteCipherToFile(ofstream& out)
 	out << "Shift is " << _shift << endl;
 
 	CipherTextClass::WriteCipherToFile(out);
+}
+
+void ShiftEncryptionClass::GlobalMM( CipherTextClass* other, ofstream& out )
+{
+	other->ShiftMM( out );
+}
+
+void ShiftEncryptionClass::ShiftMM( ofstream& out )
+{
+	out << "Shift and Shift" << endl;
+}
+
+void ShiftEncryptionClass::RepToCharMM( ofstream& out )
+{
+	out << "RepToChar and Shift" << endl;
 }
 
 #pragma endregion
@@ -111,6 +142,21 @@ void ReplacementToCharEcnryptionClass::WriteCipherToFile(ofstream& out)
 	}
 	out << endl;
 	ReplacementToCharEcnryptionClass::WriteCipherToFile(out);
+}
+
+void ReplacementToCharEcnryptionClass::GlobalMM( CipherTextClass* other, ofstream& out )
+{
+	other->RepToCharMM( out );
+}
+
+void ReplacementToCharEcnryptionClass::ShiftMM( ofstream& out )
+{
+	out << "Shift and RepToChar" << endl;
+}
+
+void ReplacementToCharEcnryptionClass::RepToCharMM( ofstream& out )
+{
+	out << "RepToChar and RepToChar" << endl;
 }
 
 #pragma endregion
@@ -192,6 +238,27 @@ bool HashArray::WriteFile(ofstream& out)
 	return false;
 }
 
+void HashArray::GlobalMM( ofstream& out )
+{
+	out << "Multimethod result" << endl;
+	vector<CipherTextClass*> united;
+	for ( int i = 0; i < MAXHASH; i++ )
+	{
+		if ( Conteiner[i].size() == 0 )
+		{
+			continue;
+		}
+		united.insert( united.end(), Conteiner[i].begin(), Conteiner[i].end() );
+	}
+
+	for ( int i = 0; i < united.size() - 1; i++ )
+	{
+		for ( int j = i + 1; j < united.size(); j++ )
+		{
+			united[i]->GlobalMM( united[j], out );
+		}
+	}
+}
 
 HashArray::HashArray()
 {
