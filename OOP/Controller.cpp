@@ -102,6 +102,25 @@ bool CipherTextClass::Compare(CipherTextClass* value)
 	return this->GetOwnerLength() > value->GetOwnerLength();
 }
 
+void CipherTextClass::GlobalMM( CipherTextClass* other, ofstream& out )
+{
+	out << "Unknown transport" << endl;
+}
+
+void CipherTextClass::ShiftMM( ofstream& out )
+{
+	out << "Unknown transport" << endl;
+}
+
+void CipherTextClass::RepToCharMM( ofstream& out )
+{
+	out << "Unknown transport" << endl;
+}
+
+void CipherTextClass::RepToIntMM( ofstream& out )
+{
+	out << "Unknown transport" << endl;
+}
 
 #pragma endregion
 
@@ -147,6 +166,26 @@ void ShiftEncryptionClass::WriteCipherToFile(ofstream& out)
 	out << "Shift is: " << _shift << endl;
 
 	CipherTextClass::WriteCipherToFile(out);
+}
+
+void ShiftEncryptionClass::GlobalMM( CipherTextClass* other, ofstream& out )
+{
+	other->ShiftMM( out );
+}
+
+void ShiftEncryptionClass::ShiftMM( ofstream& out )
+{
+	out << "Shift and Shift" << endl;
+}
+
+void ShiftEncryptionClass::RepToCharMM( ofstream& out )
+{
+	out << "RepToChar and Shift" << endl;
+}
+
+void ShiftEncryptionClass::RepToIntMM( ofstream& out )
+{
+	out << "RepToInt and Shift" << endl;
 }
 
 #pragma endregion
@@ -204,6 +243,26 @@ void ReplacementToCharEcnryptionClass::WriteCipherToFile(ofstream& out)
 	CipherTextClass::WriteCipherToFile(out);
 }
 
+void ReplacementToCharEcnryptionClass::GlobalMM( CipherTextClass* other, ofstream& out )
+{
+	other->RepToCharMM( out );
+}
+
+void ReplacementToCharEcnryptionClass::ShiftMM( ofstream& out )
+{
+	out << "Shift and RepToChar" << endl;
+}
+
+void ReplacementToCharEcnryptionClass::RepToCharMM( ofstream& out )
+{
+	out << "RepToChar and RepToChar" << endl;
+}
+
+void ReplacementToCharEcnryptionClass::RepToIntMM( ofstream& out )
+{
+	out << "RepToInt and RepToChar" << endl;
+}
+
 #pragma endregion
 
 #pragma region ReplacementToIntEncryptionClass
@@ -258,6 +317,26 @@ void ReplacementToIntEncryptionClass::WriteCipherToFile(ofstream& out)
 	}
 	out << endl;
 	CipherTextClass::WriteCipherToFile(out);
+}
+
+void ReplacementToIntEncryptionClass::GlobalMM( CipherTextClass* other, ofstream& out )
+{
+	other->RepToIntMM( out );
+}
+
+void ReplacementToIntEncryptionClass::ShiftMM( ofstream& out )
+{
+	out << "Shift and RepToInt" << endl;
+}
+
+void ReplacementToIntEncryptionClass::RepToCharMM( ofstream& out )
+{
+	out << "RepToChar and RepToInt" << endl;
+}
+
+void ReplacementToIntEncryptionClass::RepToIntMM( ofstream& out )
+{
+	out << "RepToInt and RepToInt" << endl;
 }
 
 #pragma endregion
@@ -416,6 +495,28 @@ HashArray::HashArray()
 {
 	Conteiner = new vector<CipherTextClass*>[maxhash];
 
+}
+
+void HashArray::GlobalMM( ofstream& out )
+{
+	out << "Multimethod result" << endl;
+	vector<CipherTextClass*> united;
+	for ( int i = 0; i < maxhash; i++ )
+	{
+		if ( Conteiner[i].size() == 0 )
+		{
+			continue;
+		}
+		united.insert( united.end(), Conteiner[i].begin(), Conteiner[i].end() );
+	}
+
+	for ( int i = 0; i < united.size() - 1; i++ )
+	{
+		for ( int j = i + 1; j < united.size(); j++ )
+		{
+			united[i]->GlobalMM( united[j], out );
+		}
+	}
 }
 
 HashArray::~HashArray()

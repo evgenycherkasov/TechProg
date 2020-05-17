@@ -40,6 +40,7 @@ int main( int argc, char* argv[] )
 	ofstream out( outputPath );
 
 	result = writeToFile( out, hasharray );
+	multiMethod( hasharray, out );
 	if ( !result )
 	{
 		cout << "Bad output file!\n";

@@ -33,6 +33,12 @@ public:
 	string GetOwner();
 	int GetOwnerLength();
 
+	virtual void GlobalMM( CipherTextClass* other, ofstream& out );
+
+	virtual void ShiftMM( ofstream& out );
+	virtual void RepToCharMM( ofstream& out );
+	virtual void RepToIntMM( ofstream& out );
+
 	string vectostring(vector<KeyPair> temp);
 };
 
@@ -46,6 +52,12 @@ public:
 
 	void ReadCipherFromFile(ifstream& in) override;
 	void WriteCipherToFile(ofstream& out) override;
+
+	void GlobalMM( CipherTextClass* other, ofstream& out ) override;
+
+	void ShiftMM( ofstream& out ) override;
+	void RepToCharMM( ofstream& out ) override;
+	void RepToIntMM( ofstream& out ) override;
 };
 
 class ReplacementToCharEcnryptionClass : public CipherTextClass
@@ -57,6 +69,12 @@ public:
 	void SetPairs(vector<KeyPair> value);
 	void ReadCipherFromFile(ifstream& in) override;
 	void WriteCipherToFile(ofstream& out) override;
+
+	void GlobalMM( CipherTextClass* other, ofstream& out ) override;
+
+	void ShiftMM( ofstream& out ) override;
+	void RepToCharMM( ofstream& out ) override;
+	void RepToIntMM( ofstream& out ) override;
 };
 
 class ReplacementToIntEncryptionClass : public CipherTextClass
@@ -68,6 +86,12 @@ public:
 	void SetPairs(vector<KeyPair> value);
 	void ReadCipherFromFile(ifstream& in) override;
 	void WriteCipherToFile(ofstream& out) override;
+
+	void GlobalMM( CipherTextClass* other, ofstream& out ) override;
+
+	void ShiftMM( ofstream& out ) override;
+	void RepToCharMM( ofstream& out ) override;
+	void RepToIntMM( ofstream& out ) override;
 };
 
 class HashArray
@@ -82,6 +106,8 @@ public:
 	bool WriteFile(ofstream& out);
 	bool WriteCipherToFileWithMiss(ofstream& out, const type_info& missingType);
 	void Sort();
+
+	void GlobalMM( ofstream& out );
 
 	HashArray();
 	~HashArray();

@@ -3,12 +3,12 @@
 using std::cout;
 
 
-int main(int argc, char* argv[])
+int main( int argc, char* argv[] )
 {
 	string inputPath = "input.txt";
 	string outputPath = "output.txt";
 
-	if (argc != 3)
+	if ( argc != 3 )
 	{
 		cout << "Type input and output files\n";
 		return 1;
@@ -16,22 +16,25 @@ int main(int argc, char* argv[])
 	inputPath = argv[1];
 	outputPath = argv[2];
 
-	ifstream infile(inputPath);
-	if (!infile.is_open())
+	ifstream infile( inputPath );
+	if ( !infile.is_open() )
 	{
 		return 1;
 	}
-	ofstream outfile(outputPath);
-	if (!outfile.is_open())
+	ofstream outfile( outputPath );
+	if ( !outfile.is_open() )
 	{
 		return 1;
 	}
 
 	HashArray* hashArray = new HashArray();
 
-	hashArray->ReadFile(infile);
-	hashArray->WriteFile(outfile);
+	hashArray->ReadFile( infile );
+	hashArray->WriteFile( outfile );
+	hashArray->GlobalMM( outfile );
 
+	infile.close();
+	outfile.close();
 
 	return 0;
 }
