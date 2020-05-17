@@ -50,10 +50,6 @@ public:
 	void WriteCipherToFile(ofstream& out) override;
 };
 
-class ReplacementToIntEncryptionClass : public CipherTextClass
-{
-
-};
 
 class HashArray
 {
