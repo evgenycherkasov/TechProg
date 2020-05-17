@@ -51,3 +51,5 @@ void sort( vector<CipherTexts> array[] );
 int GetOwnerLength( CipherTexts obj );
 bool WriteCipherToFileWithMiss( ofstream& out, vector<CipherTexts> hasharray[], int missingType );
 string vector_to_string( CipherTexts obj );
+
+void multiMethod( vector<CipherTexts> hasharray[], ofstream& outfile );

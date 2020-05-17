@@ -267,3 +267,84 @@ void sort( vector<CipherTexts> array[] )
 
 	}
 }
+
+void multiMethod( vector<CipherTexts> hasharray[], ofstream & outfile )
+{
+	outfile << "Multimethod result" << endl;
+	vector<CipherTexts> united;
+	for ( int i = 0; i < maxhash; i++ )
+	{
+		if ( hasharray[i].size() == 0 )
+		{
+			continue;
+		}
+		united.insert( united.end(), hasharray[i].begin(), hasharray[i].end() );
+	}
+
+	for ( int i = 0; i < united.size() - 1; i++ )
+	{
+		int k1 = united[i].type;
+
+		for ( int j = i + 1; j < united.size(); j++ )
+		{
+			int k2 = united[j].type;
+
+			switch ( k1 )
+			{
+				case ShtEnc:
+					switch ( k2 )
+					{
+						case ShtEnc:
+							outfile << "Shift and Shift" << endl;
+							break;
+						case RepEnc:
+							outfile << "Shift and RepToChar" << endl;
+							break;
+						case RepEncToInt:
+							outfile << "Shift and RepToInt" << endl;
+							break;
+						default:
+							outfile << "Unknown type" << endl;
+							break;
+					}
+					break;
+				case RepEnc:
+					switch ( k2 )
+					{
+						case ShtEnc:
+							outfile << "RepToChar and Shift" << endl;
+							break;
+						case RepEnc:
+							outfile << "RepToChar and RepToChar" << endl;
+							break;
+						case RepEncToInt:
+							outfile << "RepToChar and RepToInt" << endl;
+							break;
+						default:
+							outfile << "Unknown type" << endl;
+							break;
+					}
+					break;
+				case RepEncToInt:
+					switch ( k2 )
+					{
+						case ShtEnc:
+							outfile << "RepToInt and Shift" << endl;
+							break;
+						case RepEnc:
+							outfile << "RepToInt and RepToChar" << endl;
+							break;
+						case RepEncToInt:
+							outfile << "RepToInt and RepToInt" << endl;
+							break;
+						default:
+							outfile << "Unknown type" << endl;
+							break;
+					}
+				default:
+					outfile << "Unknown type" << endl;
+					break;
+			}
+		}
+	}
+}
