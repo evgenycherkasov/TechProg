@@ -164,7 +164,7 @@ bool writeToFile( ofstream& out, vector<CipherTexts> hasharray[] )
 	return true;
 }
 
-string vector_to_string( CipherTexts obj )
+string vectorToString( CipherTexts obj )
 {
 	vector<char> vec;
 
