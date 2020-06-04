@@ -83,9 +83,9 @@ private:
 	vector <KeyPair> _pairs;
 public:
 	vector<KeyPair> GetPairs();
-	void SetPairs(vector<KeyPair> value);
-	void ReadCipherFromFile(ifstream& in) override;
-	void WriteCipherToFile(ofstream& out) override;
+	void SetPairs( vector<KeyPair> value );
+	void ReadCipherFromFile( ifstream& in ) override;
+	void WriteCipherToFile( ofstream& out ) override;
 
 	void GlobalMM( CipherTextClass* other, ofstream& out ) override;
 
@@ -97,14 +97,14 @@ public:
 class HashArray
 {
 private:
-	int getHash(CipherTextClass* cipher);
+	int getHash( CipherTextClass* cipher );
 public:
 	vector<CipherTextClass*>* Conteiner;
 
 	const int maxhash = 128;
-	bool ReadFile(ifstream& in);
-	bool WriteFile(ofstream& out);
-	bool WriteCipherToFileWithMiss(ofstream& out, const type_info& missingType);
+	bool ReadFile( ifstream& in );
+	bool WriteFile( ofstream& out );
+	bool WriteCipherToFileWithMiss( ofstream& out, const type_info& missingType );
 	void Sort();
 
 	void GlobalMM( ofstream& out );

@@ -2,19 +2,19 @@
 
 #pragma region CipherTextClass
 
-string CipherTextClass::vectostring(vector<KeyPair> temp)
+string CipherTextClass::vectostring( vector<KeyPair> temp )
 {
 	vector<char> vec;
 
-	for (auto const& item : temp) {
-		vec.push_back(item.openChar);
-		vec.push_back(item.cipherChar);
+	for ( auto const& item : temp ) {
+		vec.push_back( item.openChar );
+		vec.push_back( item.cipherChar );
 	}
-	string str(vec.begin(), vec.end());
+	string str( vec.begin(), vec.end() );
 	return str;
 }
 
-void CipherTextClass::ReadCipherFromFile(ifstream& in)
+void CipherTextClass::ReadCipherFromFile( ifstream& in )
 {
 	if (!in.is_open())
 	{
@@ -22,22 +22,22 @@ void CipherTextClass::ReadCipherFromFile(ifstream& in)
 	}
 	string line;
 
-	getline(in, line);
+	getline( in, line );
 
 	openText = line;
 
-	getline(in, line);
+	getline( in, line );
 
 	cipherText = line;
 
-	getline(in, line);
+	getline( in, line );
 
 	owner = line;
 }
 
-void CipherTextClass::WriteCipherToFile(ofstream& out)
+void CipherTextClass::WriteCipherToFile( ofstream& out )
 {
-	if (!out.is_open())
+	if ( !out.is_open() )
 	{
 		throw std::invalid_argument("Bad output file. Can not write to file.");
 	}
@@ -51,9 +51,9 @@ string CipherTextClass::GetOpenText()
 	return openText;
 }
 
-void CipherTextClass::SetOpenText(string value)
+void CipherTextClass::SetOpenText( string value )
 {
-	if (value.length() == 0)
+	if ( value.length() == 0 )
 	{
 		throw std::invalid_argument("Bad input open text, its can not be empty");
 	}
@@ -65,9 +65,9 @@ string CipherTextClass::GetCipherText()
 	return cipherText;
 }
 
-void CipherTextClass::SetCipherText(string value)
+void CipherTextClass::SetCipherText( string value )
 {
-	if (value.length() == 0)
+	if ( value.length() == 0 )
 	{
 		throw std::invalid_argument("Bad input cipher text, its can not be empty");
 	}
@@ -84,16 +84,16 @@ string CipherTextClass::GetOwner()
 	return owner;
 }
 
-void CipherTextClass::SetOwner(string value)
+void CipherTextClass::SetOwner( string value )
 {
-	if (value.length() == 0)
+	if ( value.length() == 0 )
 	{
 		throw std::invalid_argument("Bad input owner, its can not be empty");
 	}
 	owner = value;
 }
 
-bool CipherTextClass::Compare(CipherTextClass* value)
+bool CipherTextClass::Compare( CipherTextClass* value )
 {
 	if (value == nullptr)
 	{
@@ -130,34 +130,34 @@ int ShiftEncryptionClass::GetShift()
 {
 	return _shift;
 }
-void ShiftEncryptionClass::SetShift(int value)
+void ShiftEncryptionClass::SetShift( int value )
 {
-	if (value <= 0)
+	if ( value <= 0 )
 	{
 		throw std::invalid_argument("Shift can not be <= 0.");
 	}
 	_shift = value;
 }
 
-void ShiftEncryptionClass::ReadCipherFromFile(ifstream& in)
+void ShiftEncryptionClass::ReadCipherFromFile( ifstream& in )
 {
-	if (!in.is_open())
+	if ( !in.is_open() )
 	{
 		throw std::invalid_argument("Bad input file. Can not read from file.");
 	}
 
-	CipherTextClass::ReadCipherFromFile(in);
+	CipherTextClass::ReadCipherFromFile( in );
 
 	string line;
 
-	getline(in, line);
+	getline( in, line );
 
-	_shift = atoi(line.c_str());
+	_shift = atoi( line.c_str() );
 }
 
-void ShiftEncryptionClass::WriteCipherToFile(ofstream& out)
+void ShiftEncryptionClass::WriteCipherToFile( ofstream& out )
 {
-	if (!out.is_open())
+	if ( !out.is_open() )
 	{
 		throw std::invalid_argument("Bad output file. Can not write to file.");
 	}
@@ -165,7 +165,7 @@ void ShiftEncryptionClass::WriteCipherToFile(ofstream& out)
 	out << "Type of cipher: Shift Cipher\n";
 	out << "Shift is: " << _shift << endl;
 
-	CipherTextClass::WriteCipherToFile(out);
+	CipherTextClass::WriteCipherToFile( out );
 }
 
 void ShiftEncryptionClass::GlobalMM( CipherTextClass* other, ofstream& out )
@@ -196,51 +196,51 @@ vector<KeyPair> ReplacementToCharEcnryptionClass::GetPairs()
 {
 	return _pairs;
 }
-void ReplacementToCharEcnryptionClass::SetPairs(vector<KeyPair> value)
+void ReplacementToCharEcnryptionClass::SetPairs( vector<KeyPair> value )
 {
-	if (value.size() == 0)
+	if ( value.size() == 0 )
 	{
 		throw std::invalid_argument("Bad input keypairs, its can not be empty");
 
 	}
 	_pairs = value;
 }
-void ReplacementToCharEcnryptionClass::ReadCipherFromFile(ifstream& in)
+void ReplacementToCharEcnryptionClass::ReadCipherFromFile( ifstream& in )
 {
-	if (!in.is_open())
+	if ( !in.is_open() )
 	{
 		throw std::invalid_argument("Bad input file. Can not read from file!");
 	}
 
-	CipherTextClass::ReadCipherFromFile(in);
+	CipherTextClass::ReadCipherFromFile( in );
 
 	string line;
 
-	getline(in, line);
+	getline( in, line );
 
 	KeyPair temp;
 
-	for (unsigned int i = 0; i < line.length() - 1; i += 2) {
+	for ( unsigned int i = 0; i < line.length() - 1; i += 2 ) {
 		temp.openChar = line[i];
 		temp.cipherChar = line[i + 1];
-		_pairs.push_back(temp);
+		_pairs.push_back( temp );
 	}
 }
 
-void ReplacementToCharEcnryptionClass::WriteCipherToFile(ofstream& out)
+void ReplacementToCharEcnryptionClass::WriteCipherToFile( ofstream& out )
 {
-	if (!out.is_open())
+	if ( !out.is_open() )
 	{
 		throw std::invalid_argument("Bad output file. Can not write to file.");
 	}
 
 	out << "Type of cipher: Replacement to Char" << endl;
 	out << "Key pairs are: ";
-	for (auto const& item : _pairs) {
+	for ( auto const& item : _pairs ) {
 		out << item.openChar << item.cipherChar;
 	}
 	out << endl;
-	CipherTextClass::WriteCipherToFile(out);
+	CipherTextClass::WriteCipherToFile( out );
 }
 
 void ReplacementToCharEcnryptionClass::GlobalMM( CipherTextClass* other, ofstream& out )
@@ -271,9 +271,9 @@ vector<KeyPair> ReplacementToIntEncryptionClass::GetPairs()
 {
 	return _pairs;
 }
-void ReplacementToIntEncryptionClass::SetPairs(vector<KeyPair> value)
+void ReplacementToIntEncryptionClass::SetPairs( vector<KeyPair> value )
 {
-	if (value.size() == 0)
+	if ( value.size() == 0 )
 	{
 		throw std::invalid_argument("Bad input keypairs, its can not be empty");
 
@@ -281,14 +281,14 @@ void ReplacementToIntEncryptionClass::SetPairs(vector<KeyPair> value)
 	_pairs = value;
 }
 
-void ReplacementToIntEncryptionClass::ReadCipherFromFile(ifstream& in)
+void ReplacementToIntEncryptionClass::ReadCipherFromFile( ifstream& in )
 {
 	if (!in.is_open())
 	{
 		throw std::invalid_argument("Bad input file. Can not read from file!");
 	}
 
-	CipherTextClass::ReadCipherFromFile(in);
+	CipherTextClass::ReadCipherFromFile( in );
 
 	string line;
 
@@ -296,27 +296,27 @@ void ReplacementToIntEncryptionClass::ReadCipherFromFile(ifstream& in)
 
 	KeyPair temp;
 
-	for (unsigned int i = 0; i < line.length() - 1; i += 2) {
+	for ( unsigned int i = 0; i < line.length() - 1; i += 2 ) {
 		temp.openChar = line[i];
 		temp.cipherChar = line[i + 1];
-		_pairs.push_back(temp);
+		_pairs.push_back( temp );
 	}
 }
 
-void ReplacementToIntEncryptionClass::WriteCipherToFile(ofstream& out)
+void ReplacementToIntEncryptionClass::WriteCipherToFile( ofstream& out )
 {
-	if (!out.is_open())
+	if ( !out.is_open() )
 	{
 		throw std::invalid_argument("Bad output file. Can not write to file.");
 	}
 
 	out << "Type of cipher: Replacement to Int" << endl;
 	out << "Key pairs are: ";
-	for (auto const& item : _pairs) {
+	for ( auto const& item : _pairs ) {
 		out << item.openChar << item.cipherChar;
 	}
 	out << endl;
-	CipherTextClass::WriteCipherToFile(out);
+	CipherTextClass::WriteCipherToFile( out );
 }
 
 void ReplacementToIntEncryptionClass::GlobalMM( CipherTextClass* other, ofstream& out )
@@ -345,14 +345,14 @@ void ReplacementToIntEncryptionClass::RepToIntMM( ofstream& out )
 
 void HashArray::Sort()
 {
-	for (int hashIndex = 0; hashIndex < maxhash; hashIndex++)
+	for ( int hashIndex = 0; hashIndex < maxhash; hashIndex++ )
 	{
 		int size = Conteiner[hashIndex].size();
-		for (int i = 0; i < (size - 1); i++)
+		for ( int i = 0; i < (size - 1); i++ )
 		{
-			for (int j = 0; j < (size - i - 1); j++)
+			for ( int j = 0; j < (size - i - 1); j++ )
 			{
-				if (Conteiner[hashIndex][j]->Compare(Conteiner[hashIndex][j + 1]))
+				if ( Conteiner[hashIndex][j]->Compare(Conteiner[hashIndex][j + 1]) )
 				{
 					CipherTextClass* temp = Conteiner[hashIndex][j];
 					Conteiner[hashIndex][j] = Conteiner[hashIndex][j + 1];
@@ -364,9 +364,9 @@ void HashArray::Sort()
 	}
 }
 
-int HashArray::getHash(CipherTextClass* cipherText)
+int HashArray::getHash( CipherTextClass* cipherText )
 {
-	if (cipherText == nullptr)
+	if ( cipherText == nullptr )
 	{
 		throw std::invalid_argument("Object is null!");
 	}
@@ -381,9 +381,9 @@ int HashArray::getHash(CipherTextClass* cipherText)
 	return sum % maxhash;
 }
 
-bool HashArray::ReadFile(ifstream& in)
+bool HashArray::ReadFile( ifstream& in )
 {
-	if (!in.is_open())
+	if ( !in.is_open() )
 	{
 		throw std::invalid_argument("Bad input file. Can not read from file!");
 	}
@@ -391,65 +391,65 @@ bool HashArray::ReadFile(ifstream& in)
 	int count = 0;
 
 	string line;
-	getline(in, line);
-	count = atoi(line.c_str());
+	getline( in, line );
+	count = atoi( line.c_str() );
 
-	if (count <= 0)
+	if ( count <= 0 )
 	{
 		throw std::invalid_argument("Bad input count. Its can not be <= 0");
 	}
 
-	for (int i = 0; i < count; i++)
+	for ( int i = 0; i < count; i++ )
 	{
 		CipherTextClass* tempCipher = nullptr;
 
-		getline(in, line);
-		int type = atoi(line.c_str());
+		getline( in, line );
+		int type = atoi( line.c_str() );
 
 		if (type == 0)
 		{
 			ShiftEncryptionClass* tempShiftEncObj = new ShiftEncryptionClass();
-			tempShiftEncObj->ReadCipherFromFile(in);
+			tempShiftEncObj->ReadCipherFromFile( in );
 			tempCipher = tempShiftEncObj;
 		}
-		else if (type == 1)
+		else if ( type == 1 )
 		{
 			ReplacementToCharEcnryptionClass* tempRepToCharEncObj = new ReplacementToCharEcnryptionClass();
-			tempRepToCharEncObj->ReadCipherFromFile(in);
+			tempRepToCharEncObj->ReadCipherFromFile( in );
 			tempCipher = tempRepToCharEncObj;
 		}
-		else if (type == 2)
+		else if ( type == 2 )
 		{
 			ReplacementToIntEncryptionClass* tempRepToIntEncObj = new ReplacementToIntEncryptionClass();
-			tempRepToIntEncObj->ReadCipherFromFile(in);
+			tempRepToIntEncObj->ReadCipherFromFile( in );
 			tempCipher = tempRepToIntEncObj;
 		}
 		else
 		{
 			tempCipher = new CipherTextClass();
-			tempCipher->ReadCipherFromFile(in);
+			tempCipher->ReadCipherFromFile( in );
 		}
 
-		int hash = getHash(tempCipher);
+		int hash = getHash( tempCipher );
 
-		Conteiner[hash].push_back(tempCipher);
+		Conteiner[hash].push_back( tempCipher );
 	}
 
 	return true;
 }
 
-bool HashArray::WriteFile(ofstream& out)
+bool HashArray::WriteFile( ofstream& out )
 {
-	if (!out.is_open())
+	if ( !out.is_open() )
 	{
 		throw std::invalid_argument("Bad output file. Can not write to file.");
 	}
 
 	int count = 0;
 
-	for (int i = 0; i < maxhash; i++)
+	for ( int i = 0; i < maxhash; i++ )
 	{
-		for (int j = 0; j < (int)Conteiner[i].size(); j++)
+		for ( int j = 0; j < (int)Conteiner[i].size(); j++ )
 		{
 			CipherTextClass* current = Conteiner[i][j];
 			current->WriteCipherToFile(out);
@@ -465,23 +465,23 @@ bool HashArray::WriteFile(ofstream& out)
 
 bool HashArray::WriteCipherToFileWithMiss(ofstream& out, const type_info& missingType)
 {
-	if (!out.is_open() || missingType != typeid(ShiftEncryptionClass) || missingType != typeid(ReplacementToCharEcnryptionClass) || missingType != typeid(ReplacementToIntEncryptionClass))
+	if ( !out.is_open() || missingType != typeid(ShiftEncryptionClass) || missingType != typeid(ReplacementToCharEcnryptionClass) || missingType != typeid(ReplacementToIntEncryptionClass) )
 	{
 		throw std::invalid_argument("Bad output file. Can not write to file.");
 	}
 	int count = 0;
 
-	for (int i = 0; i < maxhash; i++)
+	for ( int i = 0; i < maxhash; i++ )
 	{
-		for (int j = 0; j < (int)Conteiner[i].size(); j++)
+		for ( int j = 0; j < (int)Conteiner[i].size(); j++ )
 		{
 			CipherTextClass* current = Conteiner[i][j];
-			if (missingType == typeid(*current))
+			if ( missingType == typeid(*current) )
 			{
 				count--;
 				continue;
 			}
-			current->WriteCipherToFile(out);
+			current->WriteCipherToFile( out );
 		}
 		count += (int)Conteiner[i].size();
 	}
@@ -521,9 +521,9 @@ void HashArray::GlobalMM( ofstream& out )
 
 HashArray::~HashArray()
 {
-	for (int i = 0; i < maxhash; i++)
+	for ( int i = 0; i < maxhash; i++ )
 	{
-		for (int j = 0; j < (int)Conteiner[i].size(); j++)
+		for ( int j = 0; j < (int)Conteiner[i].size(); j++ )
 		{
 			delete Conteiner[i][j];
 		}

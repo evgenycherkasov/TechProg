@@ -50,7 +50,7 @@ namespace ProcedureProgUnitTests
 			std::vector<KeyPair> keyPairsVector;
 			keyPairsVector.push_back( tempKeyPair );
 			obj.keyPairs.pairs = keyPairsVector;
-			Assert::IsTrue( vector_to_string( obj ) == "ab" );
+			Assert::IsTrue( vectorToString( obj ) == "ab" );
 		}
 
 		TEST_METHOD( ReadFromFileTest )
@@ -85,7 +85,7 @@ namespace ProcedureProgUnitTests
 			Assert::IsTrue( second.type == RepEnc, L"assert for type 2" );
 			Assert::IsTrue( second.owner == "Oleg", L"assert for owner 2" );
 
-			string keyPairsString = vector_to_string( second );
+			string keyPairsString = vectorToString( second );
 
 			Assert::IsTrue( keyPairsString == "abcdef", L"assert for keypair 2" );
 			Assert::IsTrue( second.cipherText == "Olfg", L"assert for ciphertext 2" );
